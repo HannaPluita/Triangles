@@ -43,11 +43,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="Logic\Triangle.cs" />
+    <Compile Include="Logic\TriangleFullEqualityComparer.cs" />
+    <Compile Include="Math\CheckValues.cs" />
+    <Compile Include="Math\Ordering.cs" />
+    <Compile Include="Math\TriangleGeometry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserUI\ConsoleEntering.cs" />
+    <Compile Include="UserUI\OutputResults.cs" />
+    <Compile Include="UserUI\ParserString.cs" />
+    <Compile Include="UserUI\UserExceptions\UserException.cs" />
+    <Compile Include="UserUI\UserExceptions\UserInvalidFormatException.cs" />
+    <Compile Include="UserUI\UserExceptions\UserNegativeValueException.cs" />
+    <Compile Include="UserUI\UserExceptions\UserNullInputValueException.cs" />
+    <Compile Include="UserUI\UserExceptions\UserRangeOverflowException.cs" />
+    <Compile Include="UserUI\UserExceptions\UserZeroInputValueException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
