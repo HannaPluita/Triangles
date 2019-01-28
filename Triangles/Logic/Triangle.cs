@@ -3,25 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Triangles.Math;
+using Triangles.Logic;
 
 namespace Triangles.Logic
 {
-    public class Triangle: IComparable<Triangle>
+    public class Triangle: TriangleGeometry, IComparable<Triangle>,  IEquatable<Triangle>
     {
-        #region    Protected
-        protected double _a;
-        protected double _b;
-        protected double _c;
-        #endregion
+        public const string SIDES = "Sides";
 
-        #region    Public const
-        public const string TRIANGLE = "Sides:";
-        public const char SEPARATOR_FRONT = '<';
-        public const char SEPARATOR_BACK = '>';
-        #endregion
-
-        #region    Constructors
         public Triangle()
             :this(0.1, 0.1, 0.1)
         {
@@ -42,38 +31,48 @@ namespace Triangles.Logic
             :this(triang._a, triang._b, triang._c)
         {
         }
-        #endregion
 
-        #region    Properties
-        public double A
-        {
-            get => _a;
-        }
-
-        public double B
-        {
-            get => _b;
-        }
-
-        public double C
-        {
-            get => _c;
-        }
-        #endregion 
-
+        
         public override string ToString()
         {
-            return string.Format("{5} {3}{0}, {1}, {2}{4}", TRIANGLE, _a, _b, _c, SEPARATOR_FRONT, SEPARATOR_BACK);
+            return string.Format("{0}: {1} {2} {3}", SIDES, _a, _b, _c);
         }
 
         public int CompareTo(Triangle other)
         {
-            //If other is not valid object reference, this object is greater.
-            if(other == null)
+            if(other == null)      //If other is not valid object reference, this object is greater.
             {
                 return 1;
             }
+
             return this.GetSquare().CompareTo(other.GetSquare());    
+        }
+
+        public IViewableTriangle Clone()
+        {
+            Triangle triangle = new Triangle(this);
+
+            return triangle as IViewableTriangle;
+        }
+
+        public bool Equals(Triangle other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if ((this.A == other.A) && (this.B == other.B) && (this.C == other.C))
+            {
+                return true;
+            }
+
+            return false;
+        }
+       
+        public override int GetHashCode()
+        {
+            return (int)A.GetHashCode() + (int)B.GetHashCode() + (int)C.GetTypeCode();
         }
     }
 }
